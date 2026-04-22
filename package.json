@@ -1,0 +1,9 @@
+{
+  "name": "foodlens",
+  "version": "1.0.0",
+  "description": "AI-powered food scanner app",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {}
+}
