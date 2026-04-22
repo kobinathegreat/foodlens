@@ -258,16 +258,16 @@ body::before {
       <h1>Snap a food,<br><span>know everything.</span></h1>
       <p>Take a photo or upload — get recipes, where to buy, and health benefits.</p>
     </div>
-    <div class="upload-zone" id="uploadZone">
+    <div class="upload-zone" id="uploadZone" style="position:relative;">
       <span class="upload-icon">📸</span>
-      <div class="upload-title">Drop your food photo here</div>
-      <div class="upload-sub">or choose how to add it</div>
+      <div class="upload-title">Tap here to add a food photo</div>
+      <div class="upload-sub">Opens your camera or gallery</div>
       <div class="upload-btns">
-        <label for="cameraInput" class="btn btn-primary" style="cursor:pointer">📷 Camera</label>
-        <label for="fileInput" class="btn btn-outline" style="cursor:pointer">🖼 Upload</label>
+        <span class="btn btn-primary">📷 Camera / 🖼 Gallery</span>
       </div>
-      <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFile(this)">
-      <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none" onchange="handleFile(this)">
+      <input type="file" id="fileInput" accept="image/*"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:10;"
+        onchange="handleFile(this)">
     </div>
     <div class="preview-wrap" id="previewWrap">
       <img id="previewImg" src="" alt="Food preview">
