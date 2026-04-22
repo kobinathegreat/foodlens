@@ -91,7 +91,13 @@ body::before {
 .upload-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--text); margin-bottom:4px; }
 .upload-sub { font-size:13px; color:var(--muted); margin-bottom:16px; }
 .upload-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
-#fileInput,#cameraInput { display:none; }
+#fileInput, #cameraInput { 
+  position: absolute;
+  width: 1px; height: 1px;
+  opacity: 0; overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
 .preview-wrap { margin:16px 24px 0; border-radius:var(--radius); overflow:hidden; position:relative; display:none; }
 .preview-wrap.active { display:block; }
 .preview-wrap img { width:100%; max-height:240px; object-fit:cover; display:block; border-radius:var(--radius); }
@@ -263,11 +269,11 @@ body::before {
       <div class="upload-title">Add a food photo</div>
       <div class="upload-sub">Tap a button below to get started</div>
       <div class="upload-btns" style="flex-direction:column;align-items:center;gap:12px;">
-        <button class="btn btn-primary" style="width:220px;justify-content:center;font-size:16px;padding:14px 20px;" id="cameraBtn">📷 Take Photo</button>
-        <button class="btn btn-outline" style="width:220px;justify-content:center;font-size:16px;padding:14px 20px;" id="galleryBtn">🖼 Choose from Gallery</button>
+        <label for="cameraInput" class="btn btn-primary" style="width:220px;justify-content:center;font-size:16px;padding:14px 20px;display:flex;">📷 Take Photo</label>
+        <label for="fileInput" class="btn btn-outline" style="width:220px;justify-content:center;font-size:16px;padding:14px 20px;display:flex;">🖼 Choose from Gallery</label>
       </div>
-      <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none" onchange="handleFile(this)">
-      <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFile(this)">
+      <input type="file" id="cameraInput" accept="image/*" capture="environment" onchange="handleFile(this)">
+      <input type="file" id="fileInput" accept="image/*" onchange="handleFile(this)">
     </div>
     <div class="preview-wrap" id="previewWrap">
       <img id="previewImg" src="" alt="Food preview">
@@ -449,18 +455,6 @@ function handleFile(input) {
   };
   reader.readAsDataURL(file);
 }
-
-// Wire up buttons after DOM is ready
-document.getElementById('cameraBtn').addEventListener('click', function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  document.getElementById('cameraInput').click();
-});
-document.getElementById('galleryBtn').addEventListener('click', function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  document.getElementById('fileInput').click();
-});
 
 const zone = document.getElementById('uploadZone');
 zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
