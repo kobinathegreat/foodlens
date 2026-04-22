@@ -258,16 +258,16 @@ body::before {
       <h1>Snap a food,<br><span>know everything.</span></h1>
       <p>Take a photo or upload — get recipes, where to buy, and health benefits.</p>
     </div>
-    <div class="upload-zone" id="uploadZone" style="position:relative;">
+    <div class="upload-zone" id="uploadZone">
       <span class="upload-icon">📸</span>
-      <div class="upload-title">Tap here to add a food photo</div>
-      <div class="upload-sub">Opens your camera or gallery</div>
-      <div class="upload-btns">
-        <span class="btn btn-primary">📷 Camera / 🖼 Gallery</span>
+      <div class="upload-title">Add a food photo</div>
+      <div class="upload-sub">Tap a button below to get started</div>
+      <div class="upload-btns" style="flex-direction:column;align-items:center;gap:12px;">
+        <button class="btn btn-primary" style="width:220px;justify-content:center;font-size:16px;padding:14px 20px;" id="cameraBtn">📷 Take Photo</button>
+        <button class="btn btn-outline" style="width:220px;justify-content:center;font-size:16px;padding:14px 20px;" id="galleryBtn">🖼 Choose from Gallery</button>
       </div>
-      <input type="file" id="fileInput" accept="image/*"
-        style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:10;"
-        onchange="handleFile(this)">
+      <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none" onchange="handleFile(this)">
+      <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFile(this)">
     </div>
     <div class="preview-wrap" id="previewWrap">
       <img id="previewImg" src="" alt="Food preview">
@@ -449,6 +449,18 @@ function handleFile(input) {
   };
   reader.readAsDataURL(file);
 }
+
+// Wire up buttons after DOM is ready
+document.getElementById('cameraBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  document.getElementById('cameraInput').click();
+});
+document.getElementById('galleryBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  document.getElementById('fileInput').click();
+});
 
 const zone = document.getElementById('uploadZone');
 zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
