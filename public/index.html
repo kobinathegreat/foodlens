@@ -263,11 +263,11 @@ body::before {
       <div class="upload-title">Drop your food photo here</div>
       <div class="upload-sub">or choose how to add it</div>
       <div class="upload-btns">
-        <button class="btn btn-primary" onclick="document.getElementById('cameraInput').click()">📷 Camera</button>
-        <button class="btn btn-outline" onclick="document.getElementById('fileInput').click()">🖼 Upload</button>
+        <label for="cameraInput" class="btn btn-primary" style="cursor:pointer">📷 Camera</label>
+        <label for="fileInput" class="btn btn-outline" style="cursor:pointer">🖼 Upload</label>
       </div>
-      <input type="file" id="fileInput" accept="image/*" onchange="handleFile(this)">
-      <input type="file" id="cameraInput" accept="image/*" capture="environment" onchange="handleFile(this)">
+      <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFile(this)">
+      <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none" onchange="handleFile(this)">
     </div>
     <div class="preview-wrap" id="previewWrap">
       <img id="previewImg" src="" alt="Food preview">
